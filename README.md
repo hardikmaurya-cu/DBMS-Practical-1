@@ -20,9 +20,19 @@ DBMS-Practical-1/
 │   ├── experiment_2.sql           # Joins, Correlated Subqueries, EXISTS, INTERSECT, EXCEPT, EXPLAIN
 │   └── README.md                  # Comprehensive theory, query analysis & output tables
 │
-└── experiment-3/                  # Experiment 3: SQL Views, Updatability & Recursive CTE
-    ├── experiment_3.sql           # Schema alter, Views, Updatability tests, Recursive CTEs
-    └── README.md                  # Theory, Step-by-step walkthrough & comparison table
+├── experiment-3/                  # Experiment 3: SQL Views, Updatability & Recursive CTE
+│   ├── experiment_3.sql           # Schema alter, Views, Updatability tests, Recursive CTEs
+│   └── README.md                  # Theory, Step-by-step walkthrough & comparison table
+│
+├── experiment-4/                  # Experiment 4: Conceptual ER Diagram (E-Commerce Platform)
+│   ├── DBMS_Exp_1_ER_Diagram.pdf  # Attached original lab submission PDF
+│   ├── er_diagram.mermaid         # Visual Mermaid ER diagram definition
+│   └── README.md                  # Theoretical foundations, entity definitions & diagram
+│
+└── experiment-5/                  # Experiment 5: Relational Schema & Integrity Constraints
+    ├── DBMS_Exp_2_Relational_Schema.pdf # Attached original lab submission PDF
+    ├── experiment_5.sql           # 18-table DDL, DML sample inserts & constraint tests
+    └── README.md                  # Relational mapping matrix, query scripts & execution outputs
 ```
 
 ---
@@ -68,6 +78,36 @@ DBMS-Practical-1/
 
 ---
 
+### [Experiment 4: Conceptual Database Design & ER Diagram for an Indian E-Commerce Platform](./experiment-4/)
+- **Attached Lab Submission**: Includes original scanned submission [`DBMS_Exp_1_ER_Diagram.pdf`](./experiment-4/DBMS_Exp_1_ER_Diagram.pdf).
+- **Core Entities**: Modeling `Customer`, `Product`, `Order`, `Seller`, `Category`, `Payment`, `Delivery`, `Address`, `Cart`, `Wishlist`, and `Product_Review`.
+- **Advanced Modeling Features**:
+  - Decomposition of composite attributes (multiline addresses).
+  - Identification and handling of multi-valued attributes (multiple phone numbers, product images).
+  - Modeling weak entities (`OrderItem`).
+  - Specialization of `Product` into subclasses (`Electronics`, `Clothing`, `Books`).
+  - Interactive Mermaid ER diagram.
+
+👉 [Explore Experiment 4 Details](./experiment-4/)
+
+---
+
+### [Experiment 5: ER Diagram to Relational Schema and SQL Implementation](./experiment-5/)
+- **Attached Lab Submission**: Includes original scanned submission [`DBMS_Exp_2_Relational_Schema.pdf`](./experiment-5/DBMS_Exp_2_Relational_Schema.pdf).
+- **Relational Mapping**: Comprehensive mapping table for 18 relational tables, primary keys, and foreign keys.
+- **DDL Implementation**: Complete database creation script with referential actions (`ON DELETE CASCADE`, `ON DELETE SET NULL`).
+- **DML Implementation**: Realistic sample data insertion representing sellers, customers, hierarchical categories, products, orders, and delivery tracking.
+- **Demonstrations & Verifications**:
+  - Output 1: `SHOW TABLES;` verifying 18 generated tables.
+  - Output 2: Verification of inserted data via `SELECT` queries.
+  - Output 3: **Referential Integrity Violation** demonstration (`ERROR 1452 (23000)`).
+  - Output 4: **`ON DELETE SET NULL`** demonstration when deleting parent categories.
+  - Output 5: **`ON DELETE CASCADE`** demonstration when deleting parent customers.
+
+👉 [Explore Experiment 5 Details](./experiment-5/)
+
+---
+
 ## 🚀 Execution Guide
 
 ### Prerequisites
@@ -92,8 +132,14 @@ DBMS-Practical-1/
    mysql -u <username> -p CompanyDB < experiment-3/experiment_3.sql
    ```
 
+4. **Run Experiment 5 (E-Commerce Platform Relational Schema & Constraints)**:
+   ```bash
+   mysql -u <username> -p < experiment-5/experiment_5.sql
+   ```
+
 ---
 
 ## 👤 Author
 - **Author**: Hardik Maurya
 - **Subject**: Database Management Systems (DBMS) Laboratory
+

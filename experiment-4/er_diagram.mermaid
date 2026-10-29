@@ -1,0 +1,181 @@
+erDiagram
+    CUSTOMER ||--o{ CUSTOMER_PHONE : "has"
+    CUSTOMER ||--o{ CUSTOMER_ALT_PHONE : "has"
+    CUSTOMER ||--o{ ADDRESS : "has"
+    CUSTOMER ||--o{ ORDERS : "places"
+    CUSTOMER ||--o{ CART : "adds to"
+    CUSTOMER ||--o{ WISHLIST : "adds to"
+    CUSTOMER ||--o{ PRODUCT_REVIEW : "writes"
+    
+    SELLER ||--o{ SELLER_PHONE : "has"
+    SELLER ||--o{ PRODUCT : "lists"
+    
+    CATEGORY ||--o{ CATEGORY : "parent of"
+    CATEGORY ||--o{ PRODUCT : "classifies"
+    
+    PRODUCT ||--o{ PRODUCT_IMAGE : "has"
+    PRODUCT ||--o{ PRODUCT_REVIEW : "receives"
+    PRODUCT ||--o{ CART : "in"
+    PRODUCT ||--o{ WISHLIST : "in"
+    PRODUCT ||--o| ELECTRONICS : "specializes to"
+    PRODUCT ||--o| CLOTHING : "specializes to"
+    PRODUCT ||--o| BOOKS : "specializes to"
+    PRODUCT ||--o{ ORDERITEM : "included in"
+    
+    ADDRESS ||--o{ ADDRESS_MOBILE : "has"
+    ADDRESS ||--o{ ORDERS : "shipping destination"
+    ADDRESS ||--o{ DELIVERY : "delivered to"
+    
+    ORDERS ||--|{ ORDERITEM : "contains"
+    ORDERS ||--o{ ORDER_COUPON : "applies"
+    ORDERS ||--|| PAYMENT : "paid with"
+    ORDERS ||--|| DELIVERY : "fulfilled by"
+
+    CUSTOMER {
+        int CustomerID PK
+        string FullName
+        string Email UK
+        string Phone
+        string PasswordHash
+        date DOB
+        string Gender
+    }
+
+    SELLER {
+        int SellerID PK
+        string SellerName
+        string Email UK
+        string Phone
+        string GSTIN UK
+        string BankDetails
+        string Address
+    }
+
+    CATEGORY {
+        int CategoryID PK
+        string CategoryName
+        string Description
+        int ParentCategoryID FK
+    }
+
+    PRODUCT {
+        int ProductID PK
+        string ProductName
+        string Description
+        decimal Price
+        decimal Discount
+        int Stock
+        string Brand
+        string ImageURL
+        int CategoryID FK
+        int SellerID FK
+    }
+
+    ELECTRONICS {
+        int ProductID PK, FK
+        string Brand
+        string Warranty
+        string PowerRating
+    }
+
+    CLOTHING {
+        int ProductID PK, FK
+        string Size
+        string Colour
+        string Material
+    }
+
+    BOOKS {
+        int ProductID PK, FK
+        string ISBN UK
+        string Author
+        string Publisher
+    }
+
+    ADDRESS {
+        int AddressID PK
+        int CustomerID FK
+        string FullName
+        string Phone
+        string AddressLine1
+        string AddressLine2
+        string City
+        string State
+        string Pincode
+        string AddressType
+    }
+
+    ORDERS {
+        int OrderID PK
+        int CustomerID FK
+        date OrderDate
+        string OrderStatus
+        decimal TotalAmount
+        int ShippingAddressID FK
+    }
+
+    ORDERITEM {
+        int OrderID PK, FK
+        int ItemNo PK
+        int ProductID FK
+        int SellerID FK
+        decimal ItemPrice
+        int Quantity
+        decimal Discount
+        decimal Subtotal
+    }
+
+    COUPON {
+        int CouponID PK
+        string CouponCode UK
+        string Description
+        string DiscountType
+        decimal DiscountValue
+        decimal MinOrderValue
+        date ExpiryDate
+        boolean IsActive
+    }
+
+    PAYMENT {
+        int PaymentID PK
+        int OrderID FK, UK
+        date PaymentDate
+        decimal Amount
+        string PaymentMethod
+        string PaymentStatus
+    }
+
+    DELIVERY {
+        int DeliveryID PK
+        int OrderID FK, UK
+        int AddressID FK
+        date DeliveryDate
+        string DeliveryStatus
+        string TrackingID UK
+        string DeliveryPartner
+        decimal ShippingCharge
+    }
+
+    CART {
+        int CartID PK
+        int CustomerID FK
+        int ProductID FK
+        int Quantity
+        datetime AddedDate
+    }
+
+    WISHLIST {
+        int WishlistID PK
+        int CustomerID FK
+        int ProductID FK
+        datetime AddedDate
+    }
+
+    PRODUCT_REVIEW {
+        int ReviewID PK
+        int CustomerID FK
+        int ProductID FK
+        int Rating
+        string ReviewText
+        datetime ReviewDate
+    }
