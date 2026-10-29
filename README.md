@@ -29,10 +29,15 @@ DBMS-Practical-1/
 │   ├── er_diagram.mermaid         # Visual Mermaid ER diagram definition
 │   └── README.md                  # Theoretical foundations, entity definitions & diagram
 │
-└── experiment-5/                  # Experiment 5: Relational Schema & Integrity Constraints
-    ├── DBMS_Exp_2_Relational_Schema.pdf # Attached original lab submission PDF
-    ├── experiment_5.sql           # 18-table DDL, DML sample inserts & constraint tests
-    └── README.md                  # Relational mapping matrix, query scripts & execution outputs
+├── experiment-5/                  # Experiment 5: Relational Schema & Integrity Constraints
+│   ├── DBMS_Exp_2_Relational_Schema.pdf # Attached original lab submission PDF
+│   ├── experiment_5.sql           # 18-table DDL, DML sample inserts & constraint tests
+│   └── README.md                  # Relational mapping matrix, query scripts & execution outputs
+│
+└── experiment-6/                  # Experiment 6: Stored Procedures & Triggers with Error Handling
+    ├── EXPERIMENT_DBMS_06.pdf     # Attached original lab submission PDF
+    ├── experiment_6.sql           # transfer_employee procedure, validation & audit triggers
+    └── README.md                  # Comprehensive theory, error handling & execution outputs
 ```
 
 ---
@@ -108,6 +113,19 @@ DBMS-Practical-1/
 
 ---
 
+### [Experiment 6: Stored Procedures & Triggers with Error Handling and Audit Logging](./experiment-6/)
+- **Attached Lab Submission**: Includes original submission [`EXPERIMENT_DBMS_06.pdf`](./experiment-6/EXPERIMENT_DBMS_06.pdf).
+- **Stored Procedure with Error Handling**: `transfer_employee(emp_id, new_dept_id)` checking employee and department existence and raising custom exceptions via `SIGNAL SQLSTATE '45000'`.
+- **Edge Cases Tested**:
+  - Non-existent employee (`Emp_ID = 666` $\to$ `ERROR 1644: Employee does not exist`).
+  - Non-existent department (`Dept_ID = 666` $\to$ `ERROR 1644: Department does not exist`).
+- **Data Validation Trigger**: `before_employee_salary_update` preventing negative salaries (`NEW.Salary < 0`).
+- **Audit Logging Trigger**: `after_employee_salary_update` recording historical salary changes into `Salary_Audit` table (`OLD.Salary <> NEW.Salary`).
+
+👉 [Explore Experiment 6 Details](./experiment-6/)
+
+---
+
 ## 🚀 Execution Guide
 
 ### Prerequisites
@@ -137,9 +155,15 @@ DBMS-Practical-1/
    mysql -u <username> -p < experiment-5/experiment_5.sql
    ```
 
+5. **Run Experiment 6 (Stored Procedures & Triggers with Error Handling)**:
+   ```bash
+   mysql -u <username> -p CompanyDB < experiment-6/experiment_6.sql
+   ```
+
 ---
 
 ## 👤 Author
 - **Author**: Hardik Maurya
 - **Subject**: Database Management Systems (DBMS) Laboratory
+
 
